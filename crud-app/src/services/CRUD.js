@@ -17,6 +17,8 @@ export const createContact = async (firstName, lastName, number) => {
     lastName,
     number,
   });
+
+  return newContactRef.id;
 };
 
 export const readContacts = async () => {

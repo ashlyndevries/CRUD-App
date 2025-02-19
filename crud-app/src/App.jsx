@@ -23,7 +23,7 @@ function App() {
   return (
     <Box sx={{ width: "50vw" }}>
       <Heading />
-      <SubHeading />
+      <SubHeading contacts={contacts} setContacts={setContacts} />
       <SearchBar
         contacts={contacts}
         setFilteredContacts={setFilteredContacts}
@@ -36,6 +36,8 @@ function App() {
             firstName={c.firstName}
             lastName={c.lastName}
             number={c.number}
+            contacts={contacts}
+            setContacts={setContacts}
           />
         ))
       ) : (

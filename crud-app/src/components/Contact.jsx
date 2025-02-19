@@ -70,6 +70,8 @@ const Contact = (props) => {
         number={props.number}
         open={openEdit}
         handleClose={() => setOpenEdit(false)}
+        contacts={props.contacts}
+        setContacts={props.setContacts}
       />
       <DeleteContact
         id={props.id}
@@ -77,6 +79,8 @@ const Contact = (props) => {
         lastName={props.lastName}
         open={openDelete}
         handleClose={() => setOpenDelete(false)}
+        contacts={props.contacts}
+        setContacts={props.setContacts}
       />
     </Box>
   );
@@ -87,6 +91,15 @@ Contact.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  setContacts: PropTypes.func.isRequired,
 };
 
 export default Contact;

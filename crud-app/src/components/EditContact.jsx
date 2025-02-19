@@ -24,6 +24,11 @@ const EditContact = (props) => {
 
   const handleConfirm = async () => {
     await updateContact(props.id, firstName, lastName, number);
+    props.setContacts(
+      props.contacts.map((c) => {
+        return c.id === props.id ? { ...c, firstName, lastName, number } : c;
+      })
+    );
     props.handleClose();
   };
 
@@ -71,6 +76,15 @@ EditContact.propTypes = {
   lastName: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  setContacts: PropTypes.func.isRequired,
 };
 
 export default EditContact;

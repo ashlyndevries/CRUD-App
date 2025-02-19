@@ -1,8 +1,9 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import AddContact from "./AddContact";
+import PropTypes from "prop-types";
 
-const SubHeading = () => {
+const SubHeading = (props) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -33,9 +34,26 @@ const SubHeading = () => {
       >
         + Add Contact
       </Button>
-      <AddContact open={open} handleClose={handleClose} />
+      <AddContact
+        open={open}
+        handleClose={handleClose}
+        contacts={props.contacts}
+        setContacts={props.setContacts}
+      />
     </Box>
   );
+};
+
+SubHeading.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  setContacts: PropTypes.func.isRequired,
 };
 
 export default SubHeading;

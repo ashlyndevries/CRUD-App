@@ -17,7 +17,8 @@ const AddContact = (props) => {
   const [number, setNumber] = useState("");
 
   const handleSubmit = async () => {
-    await createContact(firstName, lastName, number);
+    const id = await createContact(firstName, lastName, number);
+    props.setContacts([...props.contacts, { id, firstName, lastName, number }]);
     props.handleClose();
   };
 
@@ -61,6 +62,15 @@ const AddContact = (props) => {
 AddContact.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  setContacts: PropTypes.func.isRequired,
 };
 
 export default AddContact;

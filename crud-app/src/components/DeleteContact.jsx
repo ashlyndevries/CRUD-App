@@ -12,6 +12,7 @@ import { deleteContact } from "../services/CRUD";
 const DeleteContact = (props) => {
   const handleSubmit = async () => {
     await deleteContact(props.id);
+    props.setContacts(props.contacts.filter((c) => c.id !== props.id));
     props.handleClose();
   };
 
@@ -45,6 +46,15 @@ DeleteContact.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  setContacts: PropTypes.func.isRequired,
 };
 
 export default DeleteContact;
