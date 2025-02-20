@@ -26,10 +26,10 @@ Ashlyn DeVries
     "You have no contacts." message is displayed.
 - UPDATE
   - Clicking on any contact will trigger a `Dialog` where a user can edit any of the three fields: First Name, 
-    Last Name, Phone Number.
+    Last Name, or Phone Number.
 - DELETE
   - Clicking on the trash can will trigger a `Dialog` asking for deletion confirmation. Pressing "Cancel"
-    will close the `Dialog` without deleting, "Confirm" will delete the record permanently.
+    will close the `Dialog` without deleting; "Confirm" will delete the record permanently.
 - SEARCH
   - By typing in the search bar, all contacts will be filtered according to Last Name.
 
@@ -38,6 +38,6 @@ Ashlyn DeVries
 To run the application simply `git clone https://github.com/ashlyndevries/CRUD-App.git`. `cd` into `crud-app` 
 and run `npm run dev`. Click on the localhost link output to the console and begin interacting with my app in your browser!
 
-**Please note:** I set up my Firebase database in *test mode* (rather than *production mode*) so anyone with my Firestore
+**Please note:** I instantiated my Firebase database in *test mode* (rather than *production mode*) so anyone with my Firestore
 database reference can view, edit, and delete data. These rules are set to expire after **30 days**, after which all client
-requests to my Firestore database will be denied for security purposes.
+requests to my Firestore database will be denied for security reasons.
