@@ -2,7 +2,7 @@
 Ashlyn DeVries
 
 ## Frameworks
-- **Front-End:** React
+- **Front-End:** React + MUI
 - **Back-End:** JavaScript
 - **Database:** Firebase (Firestore)
 
