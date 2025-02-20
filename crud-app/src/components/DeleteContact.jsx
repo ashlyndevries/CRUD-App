@@ -7,7 +7,7 @@ import {
   DialogContentText,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { deleteContact } from "../services/CRUD";
+import { deleteContact } from "../database/CRUD";
 
 const DeleteContact = (props) => {
   const handleSubmit = async () => {

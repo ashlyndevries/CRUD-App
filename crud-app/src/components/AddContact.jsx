@@ -8,7 +8,7 @@ import {
   Box,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { createContact } from "../services/CRUD";
+import { createContact } from "../database/CRUD";
 import { useEffect, useState } from "react";
 
 const AddContact = (props) => {

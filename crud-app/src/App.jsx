@@ -1,6 +1,6 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { readContacts } from "./services/CRUD";
+import { readContacts } from "./database/CRUD";
 import Contact from "./components/Contact";
 import Heading from "./components/Heading";
 import SubHeading from "./components/SubHeading";

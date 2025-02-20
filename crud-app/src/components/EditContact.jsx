@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { updateContact } from "../services/CRUD";
+import { updateContact } from "../database/CRUD";
 
 const EditContact = (props) => {
   const [firstName, setFirstName] = useState("");
