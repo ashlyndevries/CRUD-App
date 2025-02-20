@@ -25,15 +25,15 @@ const AddContact = (props) => {
   }, [props.open]);
 
   const handleSubmit = async () => {
+    setError(false);
+    setInvalid(false);
+
     if (!firstName || !lastName || !number) {
       setError(true);
       return;
     } else if (!number.match(/^\d{3}-\d{3}-\d{4}$/g)) {
       setInvalid(true);
       return;
-    } else {
-      setError(false);
-      setInvalid(false);
     }
 
     const id = await createContact(firstName, lastName, number);

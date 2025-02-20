@@ -25,15 +25,15 @@ const EditContact = (props) => {
   }, [props]);
 
   const handleConfirm = async () => {
+    setError(false);
+    setInvalid(false);
+
     if (!firstName || !lastName || !number) {
       setError(true);
       return;
     } else if (!number.match(/^\d{3}-\d{3}-\d{4}$/g)) {
       setInvalid(true);
       return;
-    } else {
-      setError(false);
-      setInvalid(false);
     }
 
     await updateContact(props.id, firstName, lastName, number);
