@@ -6,14 +6,6 @@ import PropTypes from "prop-types";
 const SubHeading = (props) => {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <Box
       sx={{
@@ -30,13 +22,13 @@ const SubHeading = (props) => {
       <Button
         variant="contained"
         sx={{ textTransform: "none" }}
-        onClick={handleClickOpen}
+        onClick={() => setOpen(true)}
       >
         + Add Contact
       </Button>
       <AddContact
         open={open}
-        handleClose={handleClose}
+        handleClose={() => setOpen(false)}
         contacts={props.contacts}
         setContacts={props.setContacts}
       />

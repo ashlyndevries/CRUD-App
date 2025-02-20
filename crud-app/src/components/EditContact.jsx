@@ -15,6 +15,8 @@ const EditContact = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [number, setNumber] = useState("");
+  const [error, setError] = useState(false);
+  const [invalid, setInvalid] = useState(false);
 
   useEffect(() => {
     setFirstName(props.firstName);
@@ -23,6 +25,17 @@ const EditContact = (props) => {
   }, [props]);
 
   const handleConfirm = async () => {
+    if (!firstName || !lastName || !number) {
+      setError(true);
+      return;
+    } else if (!number.match(/^\d{3}-\d{3}-\d{4}$/g)) {
+      setInvalid(true);
+      return;
+    } else {
+      setError(false);
+      setInvalid(false);
+    }
+
     await updateContact(props.id, firstName, lastName, number);
     props.setContacts(
       props.contacts.map((c) => {
@@ -34,20 +47,24 @@ const EditContact = (props) => {
 
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
-      <DialogTitle>Contact Information</DialogTitle>
+      <DialogTitle>Edit Contact</DialogTitle>
       <DialogContent>
-        <Box sx={{ display: "flex", flexDirection: "row", gap: 1, py: 1 }}>
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 1.5, py: 1.5 }}>
           <TextField
             label="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             fullWidth
+            required
+            error={!firstName && error}
           />
           <TextField
             label="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             fullWidth
+            required
+            error={!lastName && error}
           />
         </Box>
         <TextField
@@ -55,6 +72,8 @@ const EditContact = (props) => {
           value={number}
           onChange={(e) => setNumber(e.target.value)}
           fullWidth
+          required
+          error={(!number && error) || invalid}
         />
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2 }}>

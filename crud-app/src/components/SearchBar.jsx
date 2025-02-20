@@ -16,7 +16,8 @@ const SearchBar = (props) => {
 
   useEffect(() => {
     props.setFilteredContacts(filterContacts(searchQuery, props.contacts));
-  }, [searchQuery, props]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery, props.contacts]);
 
   return (
     <TextField

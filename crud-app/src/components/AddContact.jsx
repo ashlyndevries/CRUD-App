@@ -9,42 +9,78 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { createContact } from "../services/CRUD";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AddContact = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [number, setNumber] = useState("");
+  const [error, setError] = useState(false);
+  const [invalid, setInvalid] = useState(false);
+
+  useEffect(() => {
+    setFirstName("");
+    setLastName("");
+    setNumber("");
+  }, [props.open]);
 
   const handleSubmit = async () => {
+    if (!firstName || !lastName || !number) {
+      setError(true);
+      return;
+    } else if (!number.match(/^\d{3}-\d{3}-\d{4}$/g)) {
+      setInvalid(true);
+      return;
+    } else {
+      setError(false);
+      setInvalid(false);
+    }
+
     const id = await createContact(firstName, lastName, number);
-    props.setContacts([...props.contacts, { id, firstName, lastName, number }]);
+
+    props.setContacts([
+      ...props.contacts,
+      {
+        id,
+        firstName,
+        lastName,
+        number,
+      },
+    ]);
+
     props.handleClose();
   };
 
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
-      <DialogTitle>Contact Information</DialogTitle>
+      <DialogTitle>Add Contact</DialogTitle>
       <DialogContent>
-        <Box sx={{ display: "flex", flexDirection: "row", gap: 1, py: 1 }}>
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 1.5, py: 1.5 }}>
           <TextField
             label="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             fullWidth
+            required
+            error={!firstName && error}
           />
           <TextField
             label="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             fullWidth
+            required
+            error={!lastName && error}
           />
         </Box>
         <TextField
           label="Phone Number"
+          placeholder="###-###-####"
           value={number}
           onChange={(e) => setNumber(e.target.value)}
           fullWidth
+          required
+          error={(!number && error) || invalid}
         />
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2 }}>

@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { readContacts } from "./services/CRUD";
 import Contact from "./components/Contact";
@@ -10,25 +10,29 @@ import "./App.css";
 function App() {
   const [contacts, setContacts] = useState([]);
   const [filteredContacts, setFilteredContacts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getAllContacts = async () => {
       const allContacts = await readContacts();
       setContacts(allContacts);
+      setLoading(false);
     };
 
     getAllContacts();
   }, []);
 
   return (
-    <Box sx={{ width: "50vw" }}>
+    <Box sx={{ minWidth: "50vw" }}>
       <Heading />
       <SubHeading contacts={contacts} setContacts={setContacts} />
       <SearchBar
         contacts={contacts}
         setFilteredContacts={setFilteredContacts}
       />
-      {contacts.length !== 0 ? (
+      {loading ? (
+        <CircularProgress />
+      ) : contacts.length !== 0 ? (
         filteredContacts.map((c) => (
           <Contact
             key={c.id}
@@ -41,7 +45,7 @@ function App() {
           />
         ))
       ) : (
-        <CircularProgress />
+        <Typography sx={{ pt: 2 }}>You have no contacts.</Typography>
       )}
     </Box>
   );

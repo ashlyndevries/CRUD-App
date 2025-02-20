@@ -21,11 +21,14 @@ const DeleteContact = (props) => {
       <DialogTitle>Delete Contact</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you sure you would like to delete {props.firstName}{" "}
-          {props.lastName.slice(-1) === "s"
-            ? props.lastName + "'"
-            : props.lastName + "'s"}{" "}
-          contact information?
+          Are you sure you would like to delete{" "}
+          <b>
+            {props.firstName}{" "}
+            {props.lastName.slice(-1) === "s"
+              ? props.lastName + "'"
+              : props.lastName + "'s"}
+          </b>{" "}
+          contact information? This action cannot be undone.
         </DialogContentText>
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2 }}>
